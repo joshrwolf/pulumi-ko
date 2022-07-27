@@ -1,0 +1,161 @@
+{
+    "name": "ko",
+    "description": "A Pulumi package for creating and managing ko cloud resources.",
+    "keywords": [
+        "pulumi",
+        "ko",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`ko` Terraform Provider](https://github.com/terraform-providers/terraform-provider-ko).",
+    "repository": "https://github.com/pulumi/pulumi-ko",
+    "publisher": "Pulumi",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*"
+            }
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi/pulumi-ko/sdk/go/ko"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing ko cloud resources.",
+            "packageName": "",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-ko)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-ko` repo](https://github.com/pulumi/pulumi-ko/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-ko` repo](https://github.com/terraform-providers/terraform-provider-ko/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-ko)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-ko` repo](https://github.com/pulumi/pulumi-ko/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-ko` repo](https://github.com/terraform-providers/terraform-provider-ko/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "dockerRepo": {
+                "type": "string",
+                "description": "Container repositor to publish images to. Defaults to `KO_DOCKER_REPO` env var\n"
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the ko package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "dockerRepo": {
+                "type": "string",
+                "description": "Container repositor to publish images to. Defaults to `KO_DOCKER_REPO` env var\n"
+            }
+        },
+        "inputProperties": {
+            "dockerRepo": {
+                "type": "string",
+                "description": "Container repositor to publish images to. Defaults to `KO_DOCKER_REPO` env var\n"
+            }
+        }
+    },
+    "resources": {
+        "ko:index/koImage:KoImage": {
+            "properties": {
+                "baseImage": {
+                    "type": "string",
+                    "description": "base image to use\n"
+                },
+                "imageRef": {
+                    "type": "string",
+                    "description": "built image reference by digest\n"
+                },
+                "importpath": {
+                    "type": "string",
+                    "description": "import path to build\n"
+                },
+                "platforms": {
+                    "type": "string",
+                    "description": "platforms to build\n"
+                },
+                "workingDir": {
+                    "type": "string",
+                    "description": "working directory for the build\n"
+                }
+            },
+            "required": [
+                "imageRef",
+                "importpath"
+            ],
+            "inputProperties": {
+                "baseImage": {
+                    "type": "string",
+                    "description": "base image to use\n",
+                    "willReplaceOnChanges": true
+                },
+                "importpath": {
+                    "type": "string",
+                    "description": "import path to build\n",
+                    "willReplaceOnChanges": true
+                },
+                "platforms": {
+                    "type": "string",
+                    "description": "platforms to build\n",
+                    "willReplaceOnChanges": true
+                },
+                "workingDir": {
+                    "type": "string",
+                    "description": "working directory for the build\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "importpath"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering KoImage resources.\n",
+                "properties": {
+                    "baseImage": {
+                        "type": "string",
+                        "description": "base image to use\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "imageRef": {
+                        "type": "string",
+                        "description": "built image reference by digest\n"
+                    },
+                    "importpath": {
+                        "type": "string",
+                        "description": "import path to build\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "platforms": {
+                        "type": "string",
+                        "description": "platforms to build\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "workingDir": {
+                        "type": "string",
+                        "description": "working directory for the build\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

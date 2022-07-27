@@ -12,46 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package xyz
+package ko
 
 import (
 	"fmt"
 	"path/filepath"
 
+	"github.com/joshrwolf/pulumi-ko/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/terraform-providers/terraform-provider-xyz/xyz"
+
+	"github.com/chainguard-dev/terraform-provider-ko/shim"
 )
 
 // all of the token components used below.
 const (
 	// This variable controls the default name of the package in the package
 	// registries for nodejs and python:
-	mainPkg = "xyz"
+	mainPkg = "ko"
 	// modules:
-	mainMod = "index" // the xyz module
+	mainMod = "index" // the ko module
 )
-
-// preConfigureCallback is called before the providerConfigure function of the underlying provider.
-// It should validate that the provider can be configured, and provide actionable errors in the case
-// it cannot be. Configuration variables can be read from `vars` using the `stringValue` function -
-// for example `stringValue(vars, "accessKey")`.
-func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) error {
-	return nil
-}
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(xyz.Provider())
+	p := shimv2.NewProvider(shim.NewProvider())
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
 		P:    p,
-		Name: "xyz",
+		Name: "ko",
 		// DisplayName is a way to be able to change the casing of the provider
 		// name when being displayed on the Pulumi registry
 		DisplayName: "",
@@ -70,14 +61,14 @@ func Provider() tfbridge.ProviderInfo {
 		// for use in Pulumi programs
 		// e.g https://github.com/org/pulumi-provider-name/releases/
 		PluginDownloadURL: "",
-		Description:       "A Pulumi package for creating and managing xyz cloud resources.",
+		Description:       "A Pulumi package for creating and managing ko cloud resources.",
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{"pulumi", "xyz", "category/cloud"},
+		Keywords:   []string{"pulumi", "ko", "category/cloud"},
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
-		Repository: "https://github.com/pulumi/pulumi-xyz",
+		Repository: "https://github.com/pulumi/pulumi-ko",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
 		GitHubOrg: "",
@@ -91,8 +82,7 @@ func Provider() tfbridge.ProviderInfo {
 			// 	},
 			// },
 		},
-		PreConfigureCallback: preConfigureCallback,
-		Resources:            map[string]*tfbridge.ResourceInfo{
+		Resources: map[string]*tfbridge.ResourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi type. Two examples
 			// are below - the single line form is the common case. The multi-line form is
 			// needed only if you wish to override types or other default options.
@@ -105,6 +95,7 @@ func Provider() tfbridge.ProviderInfo {
 			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
 			// },
+			"ko_image": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "KoImage")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example
