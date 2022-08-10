@@ -48,7 +48,7 @@ setup(name='pulumi_ko',
       keywords='pulumi ko category/cloud',
       url='https://www.pulumi.com',
       project_urls={
-          'Repository': 'https://github.com/pulumi/pulumi-ko'
+          'Repository': 'https://github.com/joshrwolf/pulumi-ko'
       },
       license='Apache-2.0',
       packages=find_packages(),

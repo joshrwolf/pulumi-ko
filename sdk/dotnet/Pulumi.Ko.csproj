@@ -7,7 +7,7 @@
     <Description>A Pulumi package for creating and managing ko cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/pulumi/pulumi-ko</RepositoryUrl>
+    <RepositoryUrl>https://github.com/joshrwolf/pulumi-ko</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
 
     <TargetFramework>netcoreapp3.1</TargetFramework>

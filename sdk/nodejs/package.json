@@ -8,7 +8,7 @@
         "category/cloud"
     ],
     "homepage": "https://www.pulumi.com",
-    "repository": "https://github.com/pulumi/pulumi-ko",
+    "repository": "https://github.com/joshrwolf/pulumi-ko",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc",
